@@ -1,2 +1,2 @@
 # SQL-Learning
-I will be posting here my SQL learning path
+I will be posting my SQL learning in here!
