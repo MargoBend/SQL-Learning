@@ -1,0 +1,61 @@
+	# LIKE (ILIKE) (How many actors have a first name that starts with the letter P?)
+SELECT COUNT (actor_id)
+FROM actor
+WHERE first_name LIKE 'P%';
+
+	#BETWEEN
+# How many films have a rating of R and a replacement cost between $5 and $15?
+SELECT COUNT (film_id)
+	FROM film
+	WHERE rating='R' 
+	AND replacement_cost BETWEEN 5 AND 15;
+	
+	#DISTINCT
+SELECT COUNT(DISTINCT customer_id) FROM payment
+	
+	#GROUP BY
+# How many payments did each staff member handle and who gets the bonus?
+SELECT staff_id, COUNT (payment_id)
+FROM payment
+GROUP BY staff_id
+ORDER BY COUNT(payment_id)DESC
+        
+	#ROUND
+SELECT rating, ROUND(AVG(replacement_cost),2) FROM film
+
+	#HAVING (filtering along with GROUP)
+SELECT customer_id, SUM(amount) FROM payment
+GROUP BY customer_id 
+HAVING SUM(amount) > 100
+
+	#AS (can not use ALIAS inside a WHERE)
+SELECT customer_id,SUM(amount) AS total_spent 
+FROM payment
+GROUP BY customer_id;	
+
+	#INNER JOIN (returns only the matching rows)
+SELECT payment_id,payment.customer_id,first_name FROM payment
+INNER JOIN customer
+ON payment.customer_id = customer.customer_id
+
+	#FULL OUTER JOIN with WHERE
+SELECT * FROM customer
+FULL OUTER JOIN payment
+ON customer.customer_id=payment.customer_id
+WHERE customer.customer_id IS null
+OR payment.payment_id IS null
+	
+	#LEFT OUTER JOIN with WHERE(table order does matter)
+SELECT film.film_id,title,inventory_id,store_id
+FROM film
+LEFT JOIN inventory ON
+inventory.film_id = film.film_id
+WHERE inventory.film_id IS null
+
+	#2 JOINs
+SELECT actor.first_name,actor.last_name,film.title
+FROM actor
+LEFT JOIN film_actor ON actor.actor_id=film_actor.actor_id
+LEFT JOIN film ON film_actor.film_id=film.film_id
+WHERE first_name='Nick' AND last_name='Wahlberg';
+
