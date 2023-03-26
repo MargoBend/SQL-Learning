@@ -59,3 +59,29 @@ LEFT JOIN film_actor ON actor.actor_id=film_actor.actor_id
 LEFT JOIN film ON film_actor.film_id=film.film_id
 WHERE first_name='Nick' AND last_name='Wahlberg';
 
+	#SubQuery
+SELECT *
+FROM orders
+WHERE customer_id IN (SELECT customer_id FROM customers WHERE country = 'USA')
+#Subqueries can be nested
+SELECT *
+FROM orders
+WHERE customer_id IN (
+  SELECT customer_id
+  FROM customers
+  WHERE country IN (
+    SELECT country
+    FROM regions
+    WHERE region_name = 'North America'
+  )
+)
+
+	#EXISTS
+#In this syntax, the outer query retrieves data based on whether the subquery returns any rows or not.
+SELECT *
+FROM customers
+WHERE EXISTS (
+  SELECT *
+  FROM orders
+  WHERE orders.customer_id = customers.customer_id
+);
