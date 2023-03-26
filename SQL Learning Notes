@@ -63,7 +63,8 @@ WHERE first_name='Nick' AND last_name='Wahlberg';
 SELECT *
 FROM orders
 WHERE customer_id IN (SELECT customer_id FROM customers WHERE country = 'USA')
-#Subqueries can be nested
+
+	#Subqueries can be nested
 SELECT *
 FROM orders
 WHERE customer_id IN (
