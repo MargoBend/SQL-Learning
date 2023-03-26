@@ -24,6 +24,7 @@ ORDER BY COUNT(payment_id)DESC
 SELECT rating, ROUND(AVG(replacement_cost),2) FROM film
 
 	#HAVING (filtering along with GROUP)
+	#Order is important!
 SELECT customer_id, SUM(amount) FROM payment
 GROUP BY customer_id 
 HAVING SUM(amount) > 100
