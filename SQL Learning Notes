@@ -103,3 +103,7 @@ CREATE TABLE teachers (
 --removing constraints 
 ALTER TABLE students
 ALTER COLUMN email DROP NOT NULL
+
+--changing datatype
+ALTER TABLE teachers
+ALTER COLUMN phone TYPE VARCHAR(15)
