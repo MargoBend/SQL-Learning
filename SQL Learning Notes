@@ -87,3 +87,19 @@ WHERE EXISTS (
   FROM orders
   WHERE orders.customer_id = customers.customer_id
 );
+
+	#CREATE TABLE
+CREATE TABLE teachers (
+	teacher_id SERIAL PRIMARY KEY,
+ 	first_name VARCHAR(50) NOT NULL,
+	last_name VARCHAR(50) NOT NULL,
+	homeroom_number INTEGER,
+	department VARCHAR(100),
+	email VARCHAR(100) UNIQUE NOT NULL,
+	phone INTEGER UNIQUE NOT NULL
+);
+
+	#ALTER TABLE
+--removing constraints 
+ALTER TABLE students
+ALTER COLUMN email DROP NOT NULL
