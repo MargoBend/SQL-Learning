@@ -107,3 +107,20 @@ ALTER COLUMN email DROP NOT NULL
 --changing datatype
 ALTER TABLE teachers
 ALTER COLUMN phone TYPE VARCHAR(15)
+
+	#CASE
+	#Counting specific values in the 'rating' column and creating three new columns
+SELECT  
+SUM(CASE rating
+	WHEN 'R' THEN 1
+	ELSE 0
+END) AS r,
+SUM(CASE rating
+	WHEN 'PG' THEN 1
+	ELSE 0
+END) AS pg,
+SUM(CASE rating
+	WHEN 'PG-13' THEN 1
+	ELSE 0
+END) AS pg13
+FROM film
