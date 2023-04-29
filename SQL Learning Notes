@@ -139,3 +139,17 @@ CREATE VIEW customer_info AS
 SELECT first_name,last_name,address FROM customer
 INNER JOIN address
 ON customer.address_id=address.address_id
+
+	#UNNEST and STRING_TO_ARRAY (function converting a text to array(STRING_TO_ARRAY) and UNNEST that duplicate original element of array)
+--I want to find out the most popular genre among all games I played
+--I have the genre column but with 1-4 genres in each cell 
+--To count it correctly I need to split the column by commas
+CREATE TABLE my_game_genres AS --creating the table for an easy access
+SELECT genre_1, COUNT(*) AS count 
+FROM (
+	SELECT UNNEST(STRING_TO_ARRAY(genre, ',')) AS genre_1 --I googled the function converting a text to array(STRING_TO_ARRAY) and UNNEST that duplicate original element of array
+  	FROM my_steam_data) AS genres
+GROUP BY genre_1
+HAVING COUNT(*) > 1;
+
+
